@@ -2,18 +2,17 @@
 #include "config.h"
 #include <Arduino.h>
 
-
-
 unsigned long lastDebounceTime_UP = 0;
 unsigned long lastDebounceTime_DOWN = 0;
 unsigned long lastDebounceTime_LEFT = 0;
 unsigned long lastDebounceTime_RIGHT = 0;
 unsigned long lastDebounceTime_MIDDLE = 0;
 
-
-
 unsigned long debounceDelay = 250;
 
+const char* menuItems[] = {"WIFI", "OPTIONS", "QUIT"};
+int totalMenuItems = 3;
+int selectedItem = 0;
 
 void setupButtons(){
     pinMode(BUTTON_UP, INPUT_PULLUP);
@@ -22,11 +21,25 @@ void setupButtons(){
     pinMode(BUTTON_RIGHT, INPUT_PULLUP);
     pinMode(BUTTON_MIDDLE, INPUT_PULLUP);
 
+}
+
+void displayMenu(){
+  Serial.println("ESP32 Multi-Tool \n");
+  for(int i = 0; i < totalMenuItems; i++){
+    if(i == selectedItem){
+      Serial.print("> ");
+    }else{
+    Serial.print(" ");
+    }
+    Serial.println(menuItems[i]);
+  }
+  Serial.println();
 
 }
 
 
-void displayMenu(){
+void controlSettings(){
+
     int upState = digitalRead(BUTTON_UP);
     int downState = digitalRead(BUTTON_DOWN);
     int leftState = digitalRead(BUTTON_LEFT);
@@ -35,24 +48,37 @@ void displayMenu(){
   
     if(upState == LOW && (millis() - lastDebounceTime_UP > debounceDelay)){
       lastDebounceTime_UP = millis();
-      Serial.println("UP");
+      if(selectedItem > 0){
+        selectedItem--;
+        displayMenu();
     }
+  }
     if(downState == LOW && (millis() - lastDebounceTime_DOWN > debounceDelay)){
       lastDebounceTime_DOWN = millis();
-      Serial.println("DOWN");
+      if(selectedItem < totalMenuItems - 1){
+        selectedItem++;
+        displayMenu();
     }
-    if(leftState == LOW && (millis() - lastDebounceTime_LEFT > debounceDelay)){
-      lastDebounceTime_LEFT = millis();
-      Serial.println("LEFT");
-    }
-    if(rightState == LOW && (millis() - lastDebounceTime_RIGHT > debounceDelay)){
-      lastDebounceTime_RIGHT = millis();
-      Serial.println("RIGHT");
     }
     if(middleState == LOW && (millis() - lastDebounceTime_MIDDLE > debounceDelay)){
       lastDebounceTime_MIDDLE = millis();
-      Serial.println("MIDDLE");
+      switch(selectedItem){
+        case 0:
+          // WiFi settings
+          Serial.println("WiFi Settings");
+          break;
+        case 1:
+          // Options
+          Serial.println("Options");
+          break;
+        case 2:
+          // Quit
+          Serial.println("Exiting...");
+          while(1){} // Loop forever to prevent program from exiting
     }
-  
+
+
+
+}
 
 }

@@ -10,12 +10,11 @@ void setup() {
   Serial.begin(115200);
   
   setupButtons();
+  displayMenu();
 
-  Serial.println("ESP32 Multi-Tool");
 }
 
 void loop() {
-
-  displayMenu();
+  controlSettings();
 
 }

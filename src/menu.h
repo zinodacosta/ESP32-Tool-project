@@ -5,6 +5,6 @@
 
 void setupButtons();
 void displayMenu();
-
+void controlSettings();
 
 #endif // MENU_H
