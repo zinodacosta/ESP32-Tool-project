@@ -16,15 +16,6 @@ CC1101 Wireless Module (for 315/433/868/915MHZ)
 https://www.aliexpress.com/item/1005004333776584.html?spm=a2g0o.order_list.order_list_main.59.2d3d1802oIFUYD
 
 
-Wiring Sheet 5-Way-Controller
-
-ESP32	5-Way-Controller	
-D27		UP	
-D26		DWN	
-D25		LFT	
-D33		RHT	
-D32		MID	
-D35		SET	
-D34		RST	
+Check the Wiring Sheet "ESP32 WIRING.xlsx" for Pin Configuration
 
 
