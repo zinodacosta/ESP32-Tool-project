@@ -14,3 +14,8 @@ https://www.aliexpress.com/item/1005003391610319.html?spm=a2g0o.order_list.order
 
 CC1101 Wireless Module (for 315/433/868/915MHZ)
 https://www.aliexpress.com/item/1005004333776584.html?spm=a2g0o.order_list.order_list_main.59.2d3d1802oIFUYD
+
+
+Check the Wiring Sheet "ESP32 WIRING.xlsx" for Pin Configuration
+
+
